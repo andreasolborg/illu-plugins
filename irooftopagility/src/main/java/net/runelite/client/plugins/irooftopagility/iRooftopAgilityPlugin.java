@@ -42,6 +42,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginManager;
+import net.unethicalite.api.movement.Movement;
 import net.runelite.client.plugins.iutils.*;
 import net.runelite.client.plugins.iutils.scripts.ReflectBreakHandler;
 import net.runelite.client.ui.overlay.OverlayManager;
@@ -536,7 +537,12 @@ public class iRooftopAgilityPlugin extends Plugin {
                 return;
             }
             marksPerHour = (int) getMarksPH();
-            playerUtils.handleRun(40, 20);
+            if (!Movement.isRunEnabled() && (Movement.getRunEnergy() >= Rand.nextInt(MIN_ENERGY, MAX_MIN_ENERGY) || (local.getHealthScale() > -1 && Movement.getRunEnergy() > 0)))
+            {
+                Movement.toggleRun();
+                Time.sleepUntil(Movement::isRunEnabled, 2000);
+                return true;
+            }
             state = getState();
             beforeLoc = client.getLocalPlayer().getLocalLocation();
             switch (state) {
