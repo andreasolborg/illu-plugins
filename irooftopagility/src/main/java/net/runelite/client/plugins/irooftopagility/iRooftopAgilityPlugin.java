@@ -536,7 +536,19 @@ public class iRooftopAgilityPlugin extends Plugin {
                 return;
             }
             marksPerHour = (int) getMarksPH();
-            playerUtils.handleRun(40, 20);
+            if (config.runEnergyThreshold() <= 0)
+            {
+                client.setWeight(Weight.WEIGHT_ALL);
+            }
+            else if (config.runEnergyThreshold() >= 100)
+            {
+                client.setWeight(Weight.WEIGHT_LITTLE);
+            }
+            else
+            {
+                int weightValue = (config.runEnergyThreshold() / 10) * 16;
+                client.setWeight(Weight.of(weightValue));
+            }
             state = getState();
             beforeLoc = client.getLocalPlayer().getLocalLocation();
             switch (state) {

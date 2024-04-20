@@ -69,6 +69,21 @@ public interface iRooftopAgilityConfig extends Config {
 
     @Range(
             min = 0,
+            max = 100
+    )
+    @ConfigItem(
+            keyName = "runEnergyThreshold",
+            name = "Run Energy Threshold",
+            description = "The percentage of energy remaining to stop running at",
+            position = 9
+    )
+    default int runEnergyThreshold()
+    {
+        return 40;
+    }
+
+    @Range(
+            min = 0,
             max = 550
     )
     @ConfigItem(
