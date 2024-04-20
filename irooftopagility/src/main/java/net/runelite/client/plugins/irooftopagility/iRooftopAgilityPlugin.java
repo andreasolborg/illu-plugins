@@ -61,7 +61,7 @@ import static net.runelite.client.plugins.irooftopagility.iRooftopAgilityState.*
 @Extension
 @PluginDependency(iUtils.class)
 @PluginDescriptor(
-        name = "iRooftop Agility",
+        name = "iRooftop Agility 22 ",
         enabledByDefault = false,
         description = "Illumine auto rooftop agility plugin",
         tags = {"agility"}
@@ -536,7 +536,7 @@ public class iRooftopAgilityPlugin extends Plugin {
                 return;
             }
             marksPerHour = (int) getMarksPH();
-
+            playerUtils.handleRun(40, 20);
             state = getState();
             beforeLoc = client.getLocalPlayer().getLocalLocation();
             switch (state) {
